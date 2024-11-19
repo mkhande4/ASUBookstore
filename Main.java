@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 
 public class Main extends Application {
-	public User thisUser = new User();
+	public static User thisUser = new User();
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		FXMLLoader loader = new FXMLLoader();
