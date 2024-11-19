@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Books {
 	private ArrayList<Book> books = new ArrayList<Book>();
-	private String fileName = "src/application/BookInfo";
+	private String fileName = "src/application/BookInfo.txt";
 	protected Integer numBooks = setOriginalNumBooks();
 
 	public int setOriginalNumBooks() {
@@ -214,9 +214,11 @@ public class Books {
 
 					// Read sold status
 					Boolean sold = Boolean.parseBoolean(scan.nextLine().trim());
-
+					
+					//Read published year
+					int pubYear = Integer.parseInt(scan.nextLine().trim());
 					Book loadBook = new Book(ID, isbn, title, author, condition, category, originalPrice,
-							generatedPrice, seller, buyer, sold);
+							generatedPrice, seller, buyer, sold, pubYear);
 					books.add(loadBook);
 
 					System.out.println("Successfully loaded book: " + title);
@@ -254,13 +256,13 @@ public class Books {
 	}
 
 	public void addBook(String isbn, String title, String author, String condition, String category,
-			Double originalPrice, Double generatedPrice, String seller, String buyer, boolean sold) {
+			Double originalPrice, Double generatedPrice, String seller, String buyer, boolean sold, int pubYear) {
 
 		// Generate new ID (could be based on current size + 1 or other logic)
 		Integer newId = numBooks + 1;
 
 		Book addedBook = new Book(newId, isbn, title, author, condition, category, originalPrice, generatedPrice,
-				seller, buyer, sold);
+				seller, buyer, sold, pubYear );
 
 		// Add to ArrayList
 		books.add(addedBook);
@@ -321,6 +323,8 @@ public class Books {
 				writer.write(book.getBuyer() != null ? book.getBuyer() : "");
 				writer.newLine();
 				writer.write(book.isSold().toString());
+				writer.newLine();
+				writer.write(book.getPubYear().toString());
 				writer.newLine();
 			}
 		} catch (IOException e) {
