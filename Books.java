@@ -32,6 +32,26 @@ public class Books {
 	public Integer getNumBooks() {
 		return numBooks;
 	}
+	
+	public int getNumberSold() {
+        int numberSold = 0;
+        for (int i = 0; i < numBooks; i++) {
+            if (books.get(i).sold == true) {
+                numberSold += 1;
+            }
+        }
+        return numberSold;
+    }
+
+    public int getNumberOnMarket() {
+        int numberOnMarket = 0;
+        for (int i = 0; i < numBooks; i++) {
+            if (books.get(i).sold == false) {
+                numberOnMarket += 1;
+            }
+        }
+        return numberOnMarket;
+    }
 
 	public int getNumUsedLikeNew() {
 
