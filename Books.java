@@ -236,6 +236,10 @@ public class Books {
 		}
 	}
 
+	public Book getBook(Integer i) {
+        return books.get(i);
+    } 
+	
 	// allows the system to search for book based on ID number
 	public Book searchBookById(Integer searchKey) {
 		Book noFoundBook = new Book();
