@@ -1,4 +1,4 @@
-5
+2
 1
 1232
 First Book in the bookInfo File
@@ -10,47 +10,16 @@ Computer
 Seller@aus.com
 
 false
+2016
 2
-990090
-King Of the Hill
-Alec Morris
-Used Like New
-Computer
-115.23
-103.70700000000001
-alecmarkmorris@gmail.com
-
-false
-3
-8908908
-shawshank
-alec Morris
+89080989
+This is a test of the published year
+Alec 
 Moderately Used
 Natural Science
-185.26
-138.0
+111.11
+83.33
 alecmarkmorris@gmail.com
 
 false
-4
-54345435
-dsfasdf
-fsdfasd
-Moderately Used
-Computer
-145.85
-109.0
-alecmarkmorris@gmail.com
-
-false
-5
-54345
-dfasdf
-dfasdf
-Moderately Used
-Natural Science
-189.58
-142.19
-alecmarkmorris@gmail.com
-
-false
+2013
