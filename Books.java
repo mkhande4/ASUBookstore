@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Books {
     private ArrayList<Book> books = new ArrayList<Book>();
-    private String fileName = "BookInfo.txt";
+    private String fileName = "src/application/BookInfo";
     protected Integer numBooks = setOriginalNumBooks();
 
     public int setOriginalNumBooks() {
@@ -27,6 +27,10 @@ public class Books {
 
     public void setNumBooks(int num) {
         this.numBooks = num;
+    }
+    
+    public Integer getNumBooks() {
+    	return numBooks;
     }
 
     public void uploadBooks() throws FileNotFoundException {
@@ -100,17 +104,12 @@ public class Books {
         return noFoundBook;
     }
 
-    //returns arraylist of books
-    public ArrayList<Book> getBooks(){
-        return books;
-    }
-
     public void addBook(String isbn, String title, String author, String condition,
             String category, Double originalPrice, Double generatedPrice,
             String seller, String buyer, boolean sold) {
 
         // Generate new ID (could be based on current size + 1 or other logic)
-        Integer newId = books.size() + 1;
+        Integer newId = numBooks + 1;
 
         Book addedBook = new Book(newId, isbn, title, author, condition,
                 category, originalPrice, generatedPrice,
