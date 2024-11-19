@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #8C1D40;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SellerController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #8C1D40;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SellerController">
    <top>
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -29,7 +29,7 @@
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: FFC627; -fx-border-radius: 20; -fx-background-radius: 25; -fx-border-color: #000000; -fx-border-width: 2; -fx-translate-x: 225; -fx-translate-y: 30;" text="Log Out" textAlignment="CENTER">
+            <Button fx:id="logoutButton" onAction="#logOut" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: FFC627; -fx-border-radius: 20; -fx-background-radius: 25; -fx-border-color: #000000; -fx-border-width: 2; -fx-translate-x: 225; -fx-translate-y: 30;" text="Log Out" textAlignment="CENTER">
                <font>
                   <Font size="24.0" />
                </font>
@@ -134,7 +134,7 @@
                   </TextField>
                </children>
             </VBox>
-            <Button fx:id="listMyBook" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#listMyBookButton" style="-fx-background-color: FFC627; -fx-border-radius: 20; -fx-background-radius: 30; -fx-border-color: #000000; -fx-border-width: 2; -fx-translate-x: 115; -fx-translate-y: 5; -fx-pref-height: 40;" text="List My Book" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <Button fx:id="listMyBook" onAction='#listMyBookButton' alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"  style="-fx-background-color: FFC627; -fx-border-radius: 20; -fx-background-radius: 30; -fx-border-color: #000000; -fx-border-width: 2; -fx-translate-x: 115; -fx-translate-y: 5; -fx-pref-height: 40;" text="List My Book" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <font>
                   <Font size="20.0" />
                </font>
