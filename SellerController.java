@@ -47,6 +47,9 @@ public class SellerController{
 
     @FXML
     private TextField titleBox;
+    
+    @FXML
+    private TextField pubYearBox;
 
     @FXML
     private void listMyBookButton(ActionEvent event){
@@ -60,14 +63,14 @@ public class SellerController{
     	String condition = conditionBox.getValue();
     	String category = categoryBox.getValue();
     	String originalPrice = originalPriceBox.getText();
-    	
+    	String pubYear = pubYearBox.getText();
     	//Get email of user that is logged in 
     	String seller = Main.thisUser.email;
     	
     	//Call to checkIfEmpty function
-    	if(inputIsMissing(title, isbn, author, condition, category,originalPrice) == false) {
-        	Books.addBook(isbn, title, author, condition, category, Double.valueOf(originalPrice), generatedPrice(condition, Double.valueOf(originalPrice)) , seller, "", false);
-        	/* Testing purposes
+    	if(inputIsMissing(title, isbn, author, condition, category,originalPrice, pubYear) == false) {
+        	Books.addBook(isbn, title, author, condition, category, Double.valueOf(originalPrice), generatedPrice(condition, Double.valueOf(originalPrice)) , seller, "", false, Integer.parseInt(pubYear));
+        	//Testing purposes
         	System.out.println("Title: " + title );
         	System.out.println("ISBN: " + isbn );
         	System.out.println("Author: " + author);
@@ -76,8 +79,8 @@ public class SellerController{
         	System.out.println("Original Price: " + originalPrice);
         	System.out.println("Generated Price: " + generatedPrice(condition, Double.valueOf(originalPrice)));
         	System.out.println("User: " + seller);
+        	System.out.println("Year Published: " + pubYear);
         	System.out.println("This is should be after book is added");
-        	*/
         	Books.printBooks();
         	
         	
@@ -89,6 +92,7 @@ public class SellerController{
         	
         	
         	//Clearing all of the input fields from the user
+        	pubYearBox.clear();
         	titleBox.clear();
         	originalPriceBox.clear();
         	isbnBox.clear();
@@ -99,7 +103,7 @@ public class SellerController{
     		//Alerting the user that data about the book is missing
         	Alert dataError = new Alert(AlertType.ERROR);
         	dataError.setHeaderText("Error");
-        	dataError.setContentText("Please verify that you have entered all the information for a book");
+        	dataError.setContentText("Please verify that you have entered all the information for a book correctly.");
         	dataError.show();
     	}
  }
@@ -117,8 +121,8 @@ public class SellerController{
     
     //Function that returns true if any input from the user is missing
     //True if no input is missing
-    private boolean inputIsMissing(String title, String isbn, String author, String condition, String category, String originalPrice) {
-    	if(title == "" || isbn =="" || author == "" || condition == null || category == null || originalPrice == "") {
+    private boolean inputIsMissing(String title, String isbn, String author, String condition, String category, String originalPrice, String pubYear) {
+    	if(title == "" || isbn =="" || author == "" || condition == null || category == null || originalPrice == "" || Integer.parseInt(pubYear) < 1000) {
     		return true;
     	}
     	return false;
@@ -152,6 +156,24 @@ public class SellerController{
         authorBox.addEventFilter(KeyEvent.KEY_TYPED, event -> {
             if (!event.getCharacter().matches("[a-zA-Z ]")) { // Only allow letters
                 event.consume(); // Ignore non-alphabetic input
+            }
+        });
+        
+        
+     // Add a listener to restrict yearInput to a four-digit year less than 2025
+        pubYearBox.textProperty().addListener((observable, oldValue, newValue) -> {
+            // Ensure the input only contains digits and is at most 4 characters long
+            if (!newValue.matches("\\d*") || newValue.length() > 4) {
+            	pubYearBox.setText(oldValue); // Reset to previous valid value
+            } else {
+                // If the input is valid, further check if the value is less than 2025
+                try {
+                    if (!newValue.isEmpty() && Integer.parseInt(newValue) >= 2025) {
+                    	pubYearBox.setText(oldValue); // Reset to previous valid value
+                    }
+                } catch (NumberFormatException e) {
+                	pubYearBox.setText(oldValue); // Handle any parsing errors gracefully
+                }
             }
         });
     	
