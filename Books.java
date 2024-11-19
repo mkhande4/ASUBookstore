@@ -29,6 +29,10 @@ public class Books {
         this.numBooks = num;
     }
 
+    public void getNumBooks() {
+        return this.numBooks;
+    }
+
     public void uploadBooks() throws FileNotFoundException {
         try (Scanner scan = new Scanner(new File(fileName))) {
             books.clear();
