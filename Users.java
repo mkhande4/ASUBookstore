@@ -199,5 +199,38 @@ public class Users {
 		return users.get(i);
 	}
 
+	//need to add the following information for the admin page...
+    public int getNumBuyers() {
+        int numBuyers = 0;
+        for (int i = 0; i < numUsers; i++) {
+            if (users.get(i).accountType == "Buyer") {
+                numBuyers += 1;
+            }
+        }
+        return numBuyers;
+    }
+    
+    public int getNumSellers() {
+        int numSellers = 0;
+        for (int i = 0; i < numUsers; i++) {
+            if (users.get(i).accountType == "Seller") {
+                numSellers += 1;
+            }
+        }
+        return numSellers;
+    }
+    
+    public int getNumAdmins() {
+        int numAdmins = 0;
+        for (int i = 0; i < numUsers; i++) {
+            if (users.get(i).accountType == "Admin") {
+                numAdmins += 1;
+            }
+        }
+        return numAdmins;
+    }
+        
+    //end of admin additions
+
 }
 
