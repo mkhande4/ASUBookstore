@@ -188,6 +188,63 @@ public class Users {
 		
 		System.out.println("No such user found.");
 	}
+
+	public void changeUser(String email, String name,  String joinDate,  String password, String role) {
+		for(int i = 0; i < users.size(); i++) {
+			if((users.get(i).email).contentEquals(email) == true) {
+				File tempFile = new File("tempFile.txt");
+				File currentFile = new File(fileName);
+				try {
+					BufferedReader reader = new BufferedReader(new FileReader(fileName));
+					BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+					
+					String currentLine;
+					
+					// changes # of users
+					if((currentLine = reader.readLine()) != null) {
+						if(currentLine.matches("[0-9]+")) {
+							Integer num = Integer.valueOf(currentLine);
+							num--;
+							currentLine = num.toString();
+						}
+						writer.write(String.format("%s%n", currentLine));
+					}
+					
+					// makes a new file that skips the deleted user
+					while((currentLine = reader.readLine()) != null) {
+						if(currentLine.equals(name)) {
+							writer.write(name + "%n");
+							writer.write(role + "%n");
+							writer.write(email + "%n");
+							writer.write(password + "%n");
+							writer.write(joinDate + "%n");
+							continue;
+						}
+						writer.write(String.format("%s%n", currentLine));
+					}
+					
+					writer.close();
+					reader.close();
+					
+					Files.deleteIfExists(Paths.get(fileName));
+					tempFile.renameTo(currentFile);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				users.get(i).accountType = role;
+				users.get(i).email = email;
+				users.get(i).joinDate = joinDate;
+				users.get(i).name = name;
+				users.get(i).password = password;
+				System.out.println("User changed.");
+				return;
+			}
+		}
+		
+		System.out.println("No such user found.");
+	}
 	
 	public void printUsers() {
 		for(int i = 0; i < users.size(); i++) {
