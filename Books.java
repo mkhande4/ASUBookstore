@@ -6,9 +6,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Books {
-	private ArrayList<Book> books = new ArrayList<Book>();
+	public ArrayList<Book> books = new ArrayList<Book>();
 	private String fileName = "src/application/BookInfo.txt";
 	protected Integer numBooks = setOriginalNumBooks();
+	protected Boolean isEmpty = true;
 
 	public int setOriginalNumBooks() {
 
@@ -222,6 +223,7 @@ public class Books {
 					books.add(loadBook);
 
 					System.out.println("Successfully loaded book: " + title);
+					this.isEmpty = false;
 
 				} catch (Exception e) {
 					System.out.println("Error reading book #" + (i + 1));
@@ -240,11 +242,7 @@ public class Books {
 
 	public Book getBook(Integer i) {
         return books.get(i);
-    }
-
-	public ArrayList<Book> getBooks() {
-        return books;
-    }
+    } 
 	
 	// allows the system to search for book based on ID number
 	public Book searchBookById(Integer searchKey) {
