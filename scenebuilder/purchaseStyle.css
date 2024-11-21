@@ -1,0 +1,19 @@
+.list-cell:filled:nth-child(even), 
+.list-cell:filled:nth-child(odd) {
+    -fx-background-color: transparent;
+}
+
+.list-cell {
+	-fx-font-size: 16px;  
+    -fx-background-color: white;
+}
+
+
+.list-cell:selected {
+    -fx-background-color: white !important; 
+}
+
+
+.list-cell:selected .text {
+    -fx-fill: black;
+}
