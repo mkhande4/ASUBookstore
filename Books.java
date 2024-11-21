@@ -240,7 +240,11 @@ public class Books {
 
 	public Book getBook(Integer i) {
         return books.get(i);
-    } 
+    }
+
+	public ArrayList<Book> getBooks() {
+        return books;
+    }
 	
 	// allows the system to search for book based on ID number
 	public Book searchBookById(Integer searchKey) {
