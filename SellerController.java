@@ -178,7 +178,7 @@ public class SellerController{
     
     @FXML 
     private void goToMyBooks(ActionEvent event) {
-    	System.out.println("My Books button pressed");
+    	//System.out.println("My Books button pressed");
     	//Make Grid Pane disappear
     	gridPane.setVisible(false);
     	bottomPane.setVisible(false);
@@ -188,7 +188,7 @@ public class SellerController{
     	topPane.setVisible(true);
     	
         // Set items in TableView
-        System.out.println("Populating TableView...");
+        //System.out.println("Populating TableView...");
 
         
         // Set cell value factories using lambda expressions
@@ -237,7 +237,7 @@ public class SellerController{
     @FXML
     private void listMyBookButton(ActionEvent event){
     	//UI console call
-    	System.out.println("list my book button was pressed");
+    	//System.out.println("list my book button was pressed");
     	
     	//Get all data input from user
     	String title = titleBox.getText();
@@ -330,19 +330,16 @@ public class SellerController{
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() throws FileNotFoundException {
 
-
-
-    	
-    	
     	//Setting combo boxes with data that be selected from user
     	categoryBox.setItems(categories);
     	conditionBox.setItems(conditions);
     	
-    	//Console log of UI change
-    	System.out.println("SellerController Initialized");
-    	System.out.println("Number Of Books: " + Books.getNumBooks());
-    	Books.uploadBooks();
+    	//Console log of UI change (Testing Purposes)
+    	//System.out.println("SellerController Initialized");
+    	//System.out.println("Number Of Books: " + Books.getNumBooks());
     	
+    	Books.uploadBooks();
+    	System.out.println("Number Of Books On File: " + Books.getNumBooks());
     	System.out.println("\nPrinting Books:");
     	Books.printBooks();
     	
