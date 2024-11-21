@@ -83,7 +83,7 @@ public class PurchaseController {
 
         }
 
-       
+        priceLabel.setVisible(false);
         cartPane.setVisible(false); 
         statusLabel.setVisible(true); 
 
