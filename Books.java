@@ -334,4 +334,8 @@ public class Books {
 		}
 	}
 
+	protected ArrayList<Book> getBooks() {
+		return books;
+	}
+
 }
