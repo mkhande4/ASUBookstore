@@ -2,34 +2,41 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Glow?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #8C1D40;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SellerController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #8C1D40;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SellerController">
    <top>
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <ImageView fitHeight="44.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" style="-fx-translate-y: 35; -fx-translate-x: 20;">
                <image>
-                  <Image url="@application/Images/ASU.png" />
                </image>
             </ImageView>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: FFC627; -fx-border-radius: 20; -fx-background-radius: 25; -fx-border-color: FFFFFF; -fx-border-width: 2; -fx-translate-x: 30; -fx-translate-y: 30;" text="List Book" textAlignment="CENTER">
+            <Button fx:id="listBookButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#goToListBook" style="-fx-background-color: FFC627; -fx-border-radius: 20; -fx-background-radius: 25; -fx-border-color: FFFFFF; -fx-border-width: 2; -fx-translate-x: 30; -fx-translate-y: 30;" text="List Book" textAlignment="CENTER">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button fx:id="logoutButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#logOut" style="-fx-background-color: FFC627; -fx-border-radius: 20; -fx-background-radius: 25; -fx-border-color: #000000; -fx-border-width: 2; -fx-translate-x: 225; -fx-translate-y: 30;" text="Log Out" textAlignment="CENTER">
+            <Button fx:id="myBooksButton" alignment="CENTER" contentDisplay="CENTER" layoutX="77.0" layoutY="10.0" mnemonicParsing="false" onAction="#goToMyBooks" style="-fx-background-color: FFC627; -fx-border-radius: 20; -fx-background-radius: 25; -fx-border-color: #000000; -fx-border-width: 2; -fx-translate-x: 31; -fx-translate-y: 30;" text="My Books" textAlignment="CENTER">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+            <Button fx:id="logoutButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#logOut" style="-fx-background-color: FFC627; -fx-border-radius: 20; -fx-background-radius: 25; -fx-border-color: #000000; -fx-border-width: 2; -fx-translate-x: 100; -fx-translate-y: 30;" text="Log Out" textAlignment="CENTER">
                <font>
                   <Font size="24.0" />
                </font>
@@ -38,118 +45,137 @@
       </HBox>
    </top>
    <center>
-      <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="275.0" prefWidth="550.0" style="-fx-background-color: FFFFFF; -fx-translate-y: -10; -fx-background-radius: 20; -fx-border-color: FFC627; -fx-border-radius: 20; -fx-border-width: 2;" BorderPane.alignment="CENTER">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+      <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <Pane fx:id="bottomPane" prefHeight="200.0" prefWidth="200.0" />
+            <GridPane fx:id="gridPane" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="275.0" prefWidth="550.0" style="-fx-background-color: FFFFFF; -fx-translate-y: -10; -fx-background-radius: 20; -fx-border-color: FFC627; -fx-border-radius: 20; -fx-border-width: 2;">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-translate-x: 15; -fx-translate-y: 10;" text="Title">
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Text fx:id="titleLabel" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-translate-x: 15; -fx-translate-y: 10;" text="Title">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="titleBox" promptText="Enter Title" style="-fx-translate-y: 10; -fx-translate-x: 10; -fx-max-width: 250; -fx-pref-height: 30; -fx-border-color: FFC627; -fx-border-radius: 20; -fx-border-width: 2; -fx-background-radius: 20;">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+                     <children>
+                        <Text fx:id="isbnLabel" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-translate-x: 15; -fx-translate-y: 10;" text="ISBN">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="isbnBox" promptText="Enter Value" style="-fx-translate-y: 10; -fx-translate-x: 10; -fx-max-width: 250; -fx-pref-height: 30; -fx-border-color: FFC627; -fx-border-radius: 20; -fx-border-width: 2; -fx-background-radius: 20;">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
+                     <children>
+                        <Text fx:id="authorLabel" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-translate-x: 15; -fx-translate-y: 10;" text="Author">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="authorBox" promptText="Enter Author" style="-fx-translate-y: 10; -fx-translate-x: 10; -fx-max-width: 250; -fx-pref-height: 30; -fx-border-color: FFC627; -fx-border-radius: 20; -fx-border-width: 2; -fx-background-radius: 20;">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                     <children>
+                        <Text fx:id="conditionLabel" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-translate-x: 15; -fx-translate-y: 10;" text="Condition">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <ComboBox fx:id="conditionBox" prefWidth="150.0" promptText="Select Current Condition" style="-fx-translate-x: 10; -fx-translate-y: 10; -fx-max-width: 250; -fx-pref-height: 35; -fx-border-color: FFC627; -fx-border-radius: 20; -fx-border-width: 2; -fx-background-radius: 20; -fx-background-color: FFFFFF;" visibleRowCount="5">
+                           <effect>
+                              <Glow />
+                           </effect>
+                        </ComboBox>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <Text fx:id="categoryLabel" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-translate-x: 15; -fx-translate-y: 10;" text="Category">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <ComboBox fx:id="categoryBox" prefWidth="150.0" promptText="Select Category Of The Book" style="-fx-translate-x: 10; -fx-translate-y: 10; -fx-max-width: 250; -fx-pref-height: 35; -fx-border-color: FFC627; -fx-border-radius: 20; -fx-border-width: 2; -fx-background-radius: 20; -fx-background-color: FFFFFF;" visibleRowCount="5">
+                           <effect>
+                              <Glow />
+                           </effect>
+                        </ComboBox>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <children>
+                        <Text fx:id="origPriceLabel" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-translate-x: 15; -fx-translate-y: 10;" text="Original Price">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="originalPriceBox" promptText="Enter Original Price Of Book" style="-fx-translate-y: 10; -fx-translate-x: 10; -fx-max-width: 250; -fx-pref-height: 30; -fx-border-color: FFC627; -fx-border-radius: 20; -fx-border-width: 2; -fx-background-radius: 20;">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </VBox>
+                  <Button fx:id="listMyBook" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#listMyBookButton" style="-fx-background-color: FFC627; -fx-border-radius: 20; -fx-background-radius: 30; -fx-border-color: #000000; -fx-border-width: 2; -fx-translate-x: 115; -fx-translate-y: 5; -fx-pref-height: 40;" text="List My Book" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+                  <Text fx:id="pubYearLabel" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-translate-x: 15; -fx-translate-y: 10;" text="Published Year" GridPane.rowIndex="3">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Text>
-                  <TextField fx:id="titleBox" promptText="Enter Title" style="-fx-translate-y: 10; -fx-translate-x: 10; -fx-max-width: 250; -fx-pref-height: 30; -fx-border-color: FFC627; -fx-border-radius: 20; -fx-border-width: 2; -fx-background-radius: 20;">
+                  <TextField fx:id="pubYearBox" promptText="Enter Year" style="-fx-translate-y: 10; -fx-translate-x: 160; -fx-max-width: 100; -fx-pref-height: 30; -fx-border-color: FFC627; -fx-border-radius: 20; -fx-border-width: 2; -fx-background-radius: 20;" GridPane.rowIndex="3">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </TextField>
                </children>
-            </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+            </GridPane>
+            <Pane fx:id="topPane" prefHeight="200.0" prefWidth="200.0" visible="false">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-translate-x: 15; -fx-translate-y: 10;" text="ISBN">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Text>
-                  <TextField fx:id="isbnBox" promptText="Enter Value" style="-fx-translate-y: 10; -fx-translate-x: 10; -fx-max-width: 250; -fx-pref-height: 30; -fx-border-color: FFC627; -fx-border-radius: 20; -fx-border-width: 2; -fx-background-radius: 20;">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </TextField>
+                  <TableView fx:id="tableView" layoutX="26.0" layoutY="2.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: FFFFFF; -fx-background-radius: 20; -fx-border-color: FFC627; -fx-border-radius: 20; -fx-border-width: 2; -fx-pref-width: 550; -fx-pref-height: 275;" visible="false">
+                    <columns>
+                      <TableColumn fx:id="titleColumn" prefWidth="189.0" style="-fx-background-color: transparent; -fx-border-radius: 20; -fx-background-radius: 20;" text="Title" />
+                      <TableColumn fx:id="isbnColumn" prefWidth="79.0" text="ISBN" />
+                        <TableColumn fx:id="condColumn" prefWidth="101.0" text="Condition" />
+                        <TableColumn fx:id="categoryColumn" prefWidth="97.0" text="Category" />
+                        <TableColumn fx:id="priceColumn" prefWidth="41.0" text="Price" />
+                        <TableColumn fx:id="soldColumn" minWidth="9.333343505859375" prefWidth="40.0" text="Sold" />
+                    </columns>
+                  </TableView>
                </children>
-            </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-translate-x: 15; -fx-translate-y: 10;" text="Author">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Text>
-                  <TextField fx:id="authorBox" promptText="Enter Author" style="-fx-translate-y: 10; -fx-translate-x: 10; -fx-max-width: 250; -fx-pref-height: 30; -fx-border-color: FFC627; -fx-border-radius: 20; -fx-border-width: 2; -fx-background-radius: 20;">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </TextField>
-               </children>
-            </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-translate-x: 15; -fx-translate-y: 10;" text="Condition">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Text>
-                  <ComboBox fx:id="conditionBox" prefWidth="150.0" promptText="Select Current Condition" style="-fx-translate-x: 10; -fx-translate-y: 10; -fx-max-width: 250; -fx-pref-height: 35; -fx-border-color: FFC627; -fx-border-radius: 20; -fx-border-width: 2; -fx-background-radius: 20; -fx-background-color: FFFFFF;" visibleRowCount="5">
-                     <effect>
-                        <Glow />
-                     </effect>
-                  </ComboBox>
-               </children>
-            </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-translate-x: 15; -fx-translate-y: 10;" text="Category">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Text>
-                  <ComboBox fx:id="categoryBox" prefWidth="150.0" promptText="Select Category Of The Book" style="-fx-translate-x: 10; -fx-translate-y: 10; -fx-max-width: 250; -fx-pref-height: 35; -fx-border-color: FFC627; -fx-border-radius: 20; -fx-border-width: 2; -fx-background-radius: 20; -fx-background-color: FFFFFF;" visibleRowCount="5">
-                     <effect>
-                        <Glow />
-                     </effect>
-                  </ComboBox>
-               </children>
-            </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-translate-x: 15; -fx-translate-y: 10;" text="Original Price">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Text>
-                  <TextField fx:id="originalPriceBox" promptText="Enter Original Price Of Book" style="-fx-translate-y: 10; -fx-translate-x: 10; -fx-max-width: 250; -fx-pref-height: 30; -fx-border-color: FFC627; -fx-border-radius: 20; -fx-border-width: 2; -fx-background-radius: 20;">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </TextField>
-               </children>
-            </VBox>
-            <Button fx:id="listMyBook" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#listMyBookButton" style="-fx-background-color: FFC627; -fx-border-radius: 20; -fx-background-radius: 30; -fx-border-color: #000000; -fx-border-width: 2; -fx-translate-x: 115; -fx-translate-y: 5; -fx-pref-height: 40;" text="List My Book" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Button>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-translate-x: 15; -fx-translate-y: 10;" text="Published Year" GridPane.rowIndex="3">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Text>
-            <TextField fx:id="pubYearBox" promptText="Enter Year" style="-fx-translate-y: 10; -fx-translate-x: 160; -fx-max-width: 100; -fx-pref-height: 30; -fx-border-color: FFC627; -fx-border-radius: 20; -fx-border-width: 2; -fx-background-radius: 20;" GridPane.rowIndex="3">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </TextField>
+            </Pane>
          </children>
-      </GridPane>
+      </StackPane>
    </center>
 </BorderPane>
