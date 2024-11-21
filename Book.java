@@ -16,6 +16,7 @@ public class Book {
     protected boolean sold;
     protected int pubYear;
     public Book() {
+    	
     }
 
     public Book(Integer ID, String isbn, String title, String author, String condition, String category,
@@ -34,6 +35,11 @@ public class Book {
         this.pubYear = year;
     }
 
+    public String getTitle() {
+        return this.title;
+    }
+
+    
     // Setter functions to be able to change each attribute of a book
     public void setPubYear(int newYear) {
     	this.pubYear = newYear;
@@ -94,9 +100,6 @@ public class Book {
         return isbn;
     }
 
-    public String getTitle() {
-        return title;
-    }
 
     public String getAuthor() {
         return author;
