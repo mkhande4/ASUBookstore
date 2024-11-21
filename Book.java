@@ -13,14 +13,14 @@ public class Book {
     protected Double generatedPrice;
     protected String seller;
     protected String buyer;
-    protected boolean sold;
-    protected int pubYear;
+    protected Boolean sold;
+    protected Integer pubYear;
     public Book() {
     	
     }
 
     public Book(Integer ID, String isbn, String title, String author, String condition, String category,
-            Double originalPrice, Double generatedPrice, String seller, String buyer, boolean sold, int year) {
+            Double originalPrice, Double generatedPrice, String seller, String buyer, Boolean sold, Integer year) {
         this.ID = ID;
         this.isbn = isbn;
         this.title = title;
@@ -41,7 +41,7 @@ public class Book {
 
     
     // Setter functions to be able to change each attribute of a book
-    public void setPubYear(int newYear) {
+    public void setPubYear(Integer newYear) {
     	this.pubYear = newYear;
     }
     public void setID(Integer newID) {
