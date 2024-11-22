@@ -13,7 +13,7 @@ import javafx.event.ActionEvent;
 import java.io.FileNotFoundException;
 import java.util.*;
 
-public class BuyerPageController{
+public class BuyerController{
     @FXML
     private ComboBox<String> categoryBox;
     @FXML
