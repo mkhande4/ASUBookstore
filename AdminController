@@ -4,16 +4,30 @@ import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 
-public class AdminController extends Pane{
+public class AdminController2 extends Pane{
+	Books allBooks = new Books();
+	Users allUsers = new Users();
+	
 
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
@@ -38,22 +52,127 @@ public class AdminController extends Pane{
     private Pane editBook;
     
     @FXML
+    private ScrollPane recordsScrollPane;
+    
+    @FXML
     private Pane editUser;
     
     @FXML
-    private VBox usersVBox;
-    
+    private VBox userList;
+	
+	@FXML
+	private VBox transactionList;
+	
+	@FXML
+	private VBox bookList;
+	
+	@FXML
+	private HBox bookRowTemplate;
+	
+	@FXML
+	private VBox bookRowInfo;
+	
+	@FXML
+	private Text usedLikeNewNumber;
+	
+	@FXML
+	private Text moderatelyUsedNumber;
+	
+	@FXML
+	private Text heavilyUsedNumber;
+	
+	@FXML
+	private Text naturalScienceBooksNumber;
+	
+	@FXML
+	private Text computerScienceBooksNumber;
+	
+	@FXML
+	private Text mathBooksNumber;
+	
+	@FXML
+	private Text englishLanguageBooksNumber;
+	
+	@FXML
+	private Text buyersNumber;
+	
+	@FXML
+	private Text sellersNumber;
+	
+	@FXML
+	private Text soldNumber;
+	
+	@FXML
+	private Text onMarketNumber;
+	
+	@FXML
+	private TextField bookInfoBookName;
+	
+//	@FXML
+//	private TextField bookInfoCategory;
+	
+//	@FXML
+//	private TextField bookInfoCondition;
+	
+	@FXML
+	private TextField bookInfoAuthor;
+	
+	@FXML
+	private TextField bookInfoISBN;
+	
+	@FXML
+	private TextField bookInfoOriginalPrice;
+	
+	@FXML
+	private TextField bookInfoGeneratedPrice;
+	
+	@FXML
+	private TextField bookInfoPublishedYear;
+	
+	@FXML
+	private TextField bookInfoBuyerEmail;
+	
+	@FXML
+	private TextField bookInfoSellerEmail;
+	
+	@FXML
+	private Text bookInfoID;
+	
+	@FXML
+	private Button bookInfoSaveButton;
+	
+	@FXML
+	private Button bookInfoBackButton;
+	
+	@FXML
+	private TextField userInfoUserEmail;
+	
+	@FXML
+	private TextField userInfoName;
+	
+	@FXML
+	private TextField userInfoDateJoined;
+	
+	@FXML
+	private TextField userInfoPassword;
+	
+	@FXML
+	private TextField userInfoUserRole;
+	
+	@FXML
+	private Button userInfoSaveButton;
+	
+	@FXML
+	private Button userInfoBackButton;
+	
     @FXML
-    private VBox usersEmail;
-    
+    private ChoiceBox<String> bookInfoCategory;
+    private ObservableList<String> categories = FXCollections.observableArrayList("Natural Science","Computer", "Math", "English Language", "Other");
+
     @FXML
-    private VBox usersName;
-    
-    @FXML
-    private VBox usersDate;
-    
-    @FXML
-    private VBox usersRole;
+    private ChoiceBox<String> bookInfoCondition;
+    private ObservableList<String> conditions= FXCollections.observableArrayList("Used Like New", "Moderately Used","Heavily Used");
+	
     
     // Logout functions
 
@@ -64,7 +183,7 @@ public class AdminController extends Pane{
     	
     	Main main = new Main();
     	User noUser = new User();
-    	main.thisUser = noUser;
+    	Main.thisUser = noUser;
     	main.start(stage);
     	
     }
@@ -73,6 +192,7 @@ public class AdminController extends Pane{
     
     @FXML
     private void switchToStats(MouseEvent event) {
+    	
     	if(recordsPane.isVisible() == true) {
     		recordsPane.setVisible(false);
     	}
@@ -95,7 +215,8 @@ public class AdminController extends Pane{
     }
     
     @FXML
-    private void switchToRecords(MouseEvent event) {
+    private void switchToRecords() {
+    	
     	if(statisticsPane.isVisible() == true) {
     		statisticsPane.setVisible(false);
     	}
@@ -119,7 +240,33 @@ public class AdminController extends Pane{
     }
     
     @FXML
-    private void switchToAccounts(MouseEvent event) {
+    private void switchToEditBook(MouseEvent event) {
+    	
+    	if(statisticsPane.isVisible() == true) {
+    		statisticsPane.setVisible(false);
+    	}
+    	
+    	
+    	if(accountsPane.isVisible() == true) {
+    		accountsPane.setVisible(false);
+    	}
+    	
+    	
+    	if(recordsPane.isVisible() == true) {
+    		recordsPane.setVisible(false);
+    	}
+    	
+    	
+    	if(editUser.isVisible() == true) {
+    		editUser.setVisible(false);
+    	}
+    	
+    	editBook.setVisible(true);
+    }
+    
+    @FXML
+    private void switchToAccounts() {
+    	
     	if(recordsPane.isVisible() == true) {
     		recordsPane.setVisible(false);
     	}
@@ -142,33 +289,429 @@ public class AdminController extends Pane{
     	accountsPane.setVisible(true);
     }
     
-    private void loadInformation() {
-    	Users allUsers = new Users();
+    @FXML
+    private void switchToEditUser() {
+    	
+    	if(recordsPane.isVisible() == true) {
+    		recordsPane.setVisible(false);
+    	}
+    	
+    	
+    	if(statisticsPane.isVisible() == true) {
+    		statisticsPane.setVisible(false);
+    	}
+    	
+    	
+    	if(editBook.isVisible() == true) {
+    		editBook.setVisible(false);
+    	}
+    	
+    	
+    	if(accountsPane.isVisible() == true) {
+    		accountsPane.setVisible(false);
+    	}
+    	
+    	editUser.setVisible(true);
+    }
+    
+    private void handleBookRowClick(MouseEvent event, HBox clickedRow) {
+        System.out.println("Clicked HBox: " + clickedRow);
+        System.out.println("What's inside HBox: "+clickedRow.getChildren());
+        VBox bookRowInfo = (VBox) clickedRow.getChildren().get(0);
+        TextFlow buyerEmail = (TextFlow) clickedRow.getChildren().get(1);
+        TextFlow sellerEmail = (TextFlow) clickedRow.getChildren().get(2);
+
+        
+        //translate bookInfo items to their corresponding Text Fields
+        String bookName = ((Text) bookRowInfo.getChildren().get(0)).getText();
+        bookName = bookName.replace("Title: ", "");
+        System.out.println("This is the book's name: "+bookName);
+        System.out.println("This is what's inside bookInfoBookName: "+bookInfoBookName);
+        bookInfoBookName.setText(bookName);
+        
+        String bookCategory = ((Text) bookRowInfo.getChildren().get(1)).getText();
+        bookCategory = bookCategory.replace("Category: ", "");
+        bookInfoCategory.setValue(bookCategory);
+        
+        String bookCondition = ((Text) bookRowInfo.getChildren().get(2)).getText();
+        bookCondition = bookCondition.replace("Condition: ", "");
+        bookInfoCondition.setValue(bookCondition);
+        
+        String bookAuthor = ((Text) bookRowInfo.getChildren().get(3)).getText();
+        bookAuthor = bookAuthor.replace("Author: ", "");
+        bookInfoAuthor.setText(bookAuthor);
+        
+        String bookISBN = ((Text) bookRowInfo.getChildren().get(4)).getText();
+        bookISBN = bookISBN.replace("ISBN: ", "");
+        bookInfoISBN.setText(bookISBN);
+        
+        String bookPublishedYear = ((Text) bookRowInfo.getChildren().get(5)).getText();
+        bookPublishedYear = bookPublishedYear.replace("Published Year: ", "");
+        bookInfoPublishedYear.setText(bookPublishedYear);
+        
+        String bookOriginalPrice = ((Text) bookRowInfo.getChildren().get(6)).getText();
+        bookOriginalPrice = bookOriginalPrice.replace("Original Price: ", "");
+        bookInfoOriginalPrice.setText(bookOriginalPrice);
+        
+        String bookGeneratedPrice = ((Text) bookRowInfo.getChildren().get(7)).getText();
+        bookGeneratedPrice = bookGeneratedPrice.replace("Generated Price: ", "");
+        bookInfoGeneratedPrice.setText(bookGeneratedPrice);
+        
+        String bookID = ((Text) bookRowInfo.getChildren().get(8)).getText();
+        bookInfoID.setText(bookID);
+        
+        //set buyer and seller emails
+        bookInfoBuyerEmail.setText(((Text) buyerEmail.getChildren().get(0)).getText());
+        bookInfoSellerEmail.setText(((Text) sellerEmail.getChildren().get(0)).getText());
+        
+        switchToEditBook(event);
+    }
+    
+    
+    @FXML
+    private void handleSaveBookButtonClick() {
+    	if(allBooks.isEmpty) {
+			Alert noBooks = new Alert(AlertType.ERROR);
+			noBooks.setContentText("There are no books to edit.");
+			noBooks.show();
+    		return;
+    	}
+    	
+        System.out.println("Save button clicked!");
+        
+        Alert cannotSave = new Alert(AlertType.ERROR);
+        cannotSave.setHeaderText("Save Failure");
+        
+        if(bookInfoBookName.getText().isBlank()) {
+        	cannotSave.setContentText("Could not save: please include title.");
+        	cannotSave.show();
+        	return;
+        }
+        
+//        if(bookInfoCategory.getValue().isBlank()) {
+//        	cannotSave.setContentText("Could not save: please include category.");
+//        	cannotSave.show();
+//        	return;
+//        }
+        
+        if(bookInfoAuthor.getText().isBlank()) {
+        	cannotSave.setContentText("Could not save: please include author.");
+        	cannotSave.show();
+        	return;
+        }
+        
+        if(bookInfoISBN.getText().isBlank()) {
+        	cannotSave.setContentText("Could not save: please include ISBN.");
+        	cannotSave.show();
+        	return;
+        }
+        
+        if(bookInfoPublishedYear.getText().isBlank()) {
+        	cannotSave.setContentText("Could not save: please include publish year.");
+        	cannotSave.show();
+        	return;
+        }
+        
+        if(bookInfoOriginalPrice.getText().isBlank()) {
+        	cannotSave.setContentText("Could not save: please include original price.");
+        	cannotSave.show();
+        	return;
+        }
+        
+        if(bookInfoGeneratedPrice.getText().isBlank()) {
+        	cannotSave.setContentText("Could not save: please include generated price.");
+        	cannotSave.show();
+        	return;
+        }
+        
+        if(bookInfoBuyerEmail.getText().isBlank() && bookInfoSellerEmail.getText().isBlank()) {
+        	cannotSave.setContentText("Could not save: must have either buyer or seller.");
+        	cannotSave.show();
+        	return;
+        }
+        
+        try {
+        	Double.parseDouble(bookInfoOriginalPrice.getText());
+        	Double.parseDouble(bookInfoGeneratedPrice.getText());
+        } catch (NumberFormatException e) {
+        	cannotSave.setContentText("Could not save: book's price must be a number.");
+        	cannotSave.show();
+        	return;
+        }
+        
+        try {
+        	Integer.parseInt(bookInfoISBN.getText());
+        } catch (NumberFormatException e1) {
+        	cannotSave.setContentText("Could not save: ISBN must only contain numbers.");
+        	cannotSave.show();
+        	return;
+        }
+        
+        try {
+        	Integer.parseInt(bookInfoPublishedYear.getText());
+        } catch (NumberFormatException e2) {
+        	cannotSave.setContentText("Could not save: published year must only contain numbers.");
+        	cannotSave.show();
+        	return;
+        }
+        
+        if(Integer.parseInt(bookInfoPublishedYear.getText()) > 2024 || Integer.parseInt(bookInfoPublishedYear.getText()) < 0) {
+           	cannotSave.setContentText("Could not save: published year must be valid year.");
+        	cannotSave.show();
+        	return;
+        }
+        
+    	for (int i = 0; i < allBooks.getNumBooks(); i++) {
+    		if (allBooks.getBook(i).ID.equals(Integer.parseInt(bookInfoID.getText()))) {
+    			allBooks.getBook(i).setTitle(bookInfoBookName.getText());
+    			allBooks.getBook(i).setCategory(bookInfoCategory.getValue());
+    			allBooks.getBook(i).setCondition(bookInfoCondition.getValue());
+    			allBooks.getBook(i).setAuthor(bookInfoAuthor.getText());
+    			allBooks.getBook(i).setIsbn(bookInfoISBN.getText());
+    			allBooks.getBook(i).setPubYear(Integer.parseInt(bookInfoPublishedYear.getText()));
+    			allBooks.getBook(i).setOriginalPrice(Double.parseDouble(bookInfoOriginalPrice.getText()));
+    			allBooks.getBook(i).setGeneratedPrice(Double.parseDouble(bookInfoGeneratedPrice.getText()));
+    			allBooks.getBook(i).setBuyer(bookInfoBuyerEmail.getText());
+    			allBooks.getBook(i).setSeller(bookInfoSellerEmail.getText());;
+    		}
+    	}
+    	
+    	allBooks.updateBookFile();
+    	
+    	// shown books now updated
+    	loadInformation();
+    	
+    }
+    
+    
+    @FXML
+    private void handleBookBackButtonClick() {
+    	System.out.println("Back button clicked!");
+    	switchToRecords();
+    }
+    
+    
+    
+    @FXML
+    private void handleUserRowClick(HBox userRow) {
+    	System.out.println("User row clicked!");
+    	String email = ((Text) ((TextFlow) userRow.getChildren().get(0)).getChildren().get(0)).getText();
+    	userInfoUserEmail.setText(email);
+    	userInfoName.setText( ((Text) ((TextFlow) userRow.getChildren().get(1)).getChildren().get(0)).getText());
+    	userInfoDateJoined.setText( ((Text) ((TextFlow) userRow.getChildren().get(2)).getChildren().get(0)).getText());
+    	userInfoUserRole.setText( ((Text) ((TextFlow) userRow.getChildren().get(3)).getChildren().get(0)).getText());
+    	
     	try {
-			allUsers.uploadUsers();
+    		if(allUsers.isEmpty) {
+    			allUsers.uploadUsers();
+    		}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	
+    	userInfoPassword.setText(allUsers.searchUsersByEmail(email).getPassword());
+    	
+    	switchToEditUser();
+    }
+    
+    @FXML
+    private void handleSaveUserButtonClick() {
+    	
+    	int index = 0;
+    	for (int i = 0; i < allUsers.getNumUsers(); i++) {
+    		if (allUsers.getUser(i).getEmail().equals(userInfoUserEmail.getText())) {
+    			index = i;
+    			break;
+    		}
+    	}
+    	
+    	allUsers.getUser(index).setEmail(userInfoUserEmail.getText());
+    	allUsers.getUser(index).setName(userInfoName.getText());
+    	allUsers.getUser(index).setJoinDate(userInfoDateJoined.getText());
+    	allUsers.getUser(index).setPassword(userInfoPassword.getText());
+    	allUsers.getUser(index).setAccountType(userInfoUserRole.getText());
+    	
+    	allUsers.changeUser(userInfoUserEmail.getText(), userInfoName.getText(),  userInfoDateJoined.getText(),  userInfoPassword.getText(), userInfoUserRole.getText());
+    	
+    	//shown users now updated
+    	loadInformation();
+    }
+    
+    
+    @FXML
+    private void handleUserBackButtonClick() {
+    	System.out.println("Back button clicked!");
+    	switchToAccounts();
+    }
+    
+    private void loadInformation() {
+    	Integer numB;
+    	if(allBooks.isEmpty == true) {
+	    	try {
+	    		System.out.println("In the try (empty) ...");
+	    		allBooks.uploadBooks();
+			} catch (FileNotFoundException e) {
+				System.out.println("In the catch (empty)...");
+				e.printStackTrace();
+			}
+    	} else {
+    		try {
+	    		System.out.println("in the try (full) ...");
+	    		allBooks.uploadBooks();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				System.out.println("in the catch (full)...");
+				e.printStackTrace();
+			}
+    			bookList.getChildren().clear();
+    	}
+    	
+    	//get information for the statistics page
+    	usedLikeNewNumber.setText("" + allBooks.getNumUsedLikeNew().toString());
+    	moderatelyUsedNumber.setText("" + allBooks.getNumModeratelyUsed().toString());
+    	heavilyUsedNumber.setText("" + allBooks.getNumHeavilyUsed().toString());
+    	naturalScienceBooksNumber.setText("" + allBooks.getNumNaturalScienceBooks().toString());
+    	computerScienceBooksNumber.setText("" + allBooks.getNumComputerScienceBooks().toString());
+    	mathBooksNumber.setText("" + allBooks.getNumMathBooks().toString());
+    	englishLanguageBooksNumber.setText("" + allBooks.getNumEnglishLanguageBooks().toString());
+    	
+    	
+    	//get more information for the statistics page
+    	soldNumber.setText(""+allBooks.getNumberSold().toString());
+    	onMarketNumber.setText(""+allBooks.getNumberOnMarket().toString());
+    	
+    	
+    	numB = allBooks.getNumBooks();
+
+    	for(Integer i = 0; i<numB; i++) {
+    		//do stuff
+    		
+    		//Retrieve book that needs to be represented visually
+    		Book bookToAdd = allBooks.getBook(i);
+    		
+    		//create the containers for that book
+    		HBox bookRow = new HBox();
+    		bookRow.setId("BookRow" + i.toString());
+    	    bookRow.setPrefWidth(530.0);
+    	    VBox bookRowInfo = new VBox();
+    	    //make sure the book information is a certain width
+    	    bookRowInfo.setPrefWidth(270);
+    	    bookRowInfo.setMinWidth(270);
+    	    bookRowInfo.setMaxWidth(270);
+
+
+    	    //hide text for book ID
+    	    Text idText = new Text(bookToAdd.ID.toString());
+    	    idText.setVisible(false);
+    	    
+    	    
+    	    //fill the containers
+    	    bookRowInfo.getChildren().addAll(
+    	            new Text("Title: "+bookToAdd.title),
+    	            new Text("Category: "+bookToAdd.category),
+    	            new Text("Condition: "+bookToAdd.condition),
+    	            new Text("Author: "+bookToAdd.author),
+    	            new Text("ISBN: "+bookToAdd.isbn),
+    	            new Text("Published Year: "+bookToAdd.pubYear.toString()),
+    	            new Text("Original Price: "+bookToAdd.originalPrice.toString()),
+    	            new Text("Generated Price: "+bookToAdd.generatedPrice.toString()),
+    	            idText
+    	        );
+    	    
+    	    Text bookRowBuyerEmail = new Text(bookToAdd.buyer);
+    	    //make sure the book information is a certain width
+    	    TextFlow buyerTextFlow = new TextFlow(bookRowBuyerEmail);
+    	    buyerTextFlow.setPrefWidth(110);
+    	    buyerTextFlow.setMinWidth(110);
+    	    buyerTextFlow.setMaxWidth(110);
+    	    
+    	    Text bookRowSellerEmail = new Text(bookToAdd.seller);
+    	    TextFlow sellerTextFlow = new TextFlow(bookRowSellerEmail);
+    	    sellerTextFlow.setPrefWidth(110);
+    	    sellerTextFlow.setMinWidth(110);
+    	    sellerTextFlow.setMaxWidth(110);
+    	    
+    	    bookRow.getChildren().addAll(bookRowInfo, buyerTextFlow, sellerTextFlow);
+    	    
+    	 // Add click listener to the HBox
+            bookRow.setOnMouseClicked(event -> handleBookRowClick(event, bookRow));
+            bookRow.setVisible(true);
+    	    
+    	    //add the row to the list
+    	    bookList.getChildren().add(bookRow);
+    		
+    	}
+    	
+    	if(allUsers.isEmpty == true) {
+	    	try {
+				allUsers.uploadUsers();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	} else {
+    		try {
+				allUsers.uploadUsers();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    		userList.getChildren().clear();
+    	}
+    	
+    	
+    	//get more information for statistics page
+    	buyersNumber.setText(""+allUsers.getNumBuyers());
+    	sellersNumber.setText(""+allUsers.getNumSellers());
+    	
     	Integer numU = allUsers.getNumUsers();
     	
     	for(int i = 0; i<numU; i++) {
-    		Text showEmail = new Text(allUsers.getUser(i).email);
-    		Text showName = new Text(allUsers.getUser(i).name);
-    		Text showDate = new Text(allUsers.getUser(i).joinDate);
-    		Text showRole = new Text(allUsers.getUser(i).accountType);
+    		User userToAdd = allUsers.getUser(i);
+    		HBox userRow = new HBox();
     		
-    		usersEmail.getChildren().add(showEmail);
-    		usersName.getChildren().add(showName);
-    		usersDate.getChildren().add(showDate);
-    		usersRole.getChildren().add(showRole);
+    		Text userEmail = new Text(userToAdd.email);
+    	    TextFlow userEmailTextFlow = new TextFlow(userEmail);
+    	    userEmailTextFlow.setPrefWidth(160);
+    	    userEmailTextFlow.setMinWidth(160);
+    	    userEmailTextFlow.setMaxWidth(160);
+    	    
+    	    Text userName = new Text(userToAdd.name);
+    	    TextFlow userNameTextFlow = new TextFlow(userName);
+    	    userNameTextFlow.setPrefWidth(150);
+    	    userNameTextFlow.setMinWidth(150);
+    	    userNameTextFlow.setMaxWidth(150);
+    	    
+    	    Text dateJoined = new Text(userToAdd.joinDate);
+    	    TextFlow dateJoinedTextFlow = new TextFlow(dateJoined);
+    	    dateJoinedTextFlow.setPrefWidth(100);
+    	    dateJoinedTextFlow.setMinWidth(100);
+    	    dateJoinedTextFlow.setMaxWidth(100);
+    	    
+    	    Text userRole = new Text(userToAdd.accountType);
+    	    TextFlow userRoleTextFlow = new TextFlow(userRole);
+    	    userRoleTextFlow.setPrefWidth(55);
+    	    userRoleTextFlow.setMinWidth(55);
+    	    userRoleTextFlow.setMaxWidth(55);
+    		
+    	    userRow.getChildren().addAll(userEmailTextFlow, userNameTextFlow, dateJoinedTextFlow, userRoleTextFlow);
+    	    
+    	    // Add click listener to the HBox
+    	    userRow.setOnMouseClicked(event -> handleUserRowClick(userRow));
+    	    userRow.setVisible(true);
+       	    
+       	    //add the row to the list
+       	    userList.getChildren().add(userRow);
     		}
+    	bookInfoCategory.setItems(categories);
+    	bookInfoCondition.setItems(conditions);
     }
+
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
     	loadInformation();
+    	
     }
-
 }
