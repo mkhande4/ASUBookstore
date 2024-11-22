@@ -75,7 +75,7 @@ public class BuyerController{
 
 
         for(int i = 0; i < booksObject.numBooks; i++){
-            if(allBooks.get(i).getCategory().equals(selectedCategory)){
+            if(allBooks.get(i).getCategory().equals(selectedCategory) && !allBooks.get(i).isSold()){
                 selectedCategoryAllBooks.add(allBooks.get(i));
                 if(!uniqueISBNSelectedCategory.contains(allBooks.get(i).isbn)){
                     uniqueISBNSelectedCategory.add(allBooks.get(i).isbn);
@@ -125,7 +125,7 @@ public class BuyerController{
         //ArrayList<ArrayList<Book>> allCategoryBooksPerISBN = new ArrayList<ArrayList<Book>>();
 
         for(int i = 0; i < selectedCategoryAllBooks.size(); i++){
-            if(selectedCategoryAllBooks.get(i).getCondition().equals(selectedCondition)){
+            if(selectedCategoryAllBooks.get(i).getCondition().equals(selectedCondition) && !selectedCategoryAllBooks.get(i).isSold()){
                 selectedConditionAllBooks.add(selectedCategoryAllBooks.get(i));
                 if(!uniqueISBNSelectedCondition.contains(selectedCategoryAllBooks.get(i).isbn)){
                     uniqueISBNSelectedCondition.add(selectedCategoryAllBooks.get(i).isbn);
