@@ -24,7 +24,7 @@ import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 
-public class AdminController2 extends Pane{
+public class AdminController extends Pane{
 	Books allBooks = new Books();
 	Users allUsers = new Users();
 	
@@ -107,6 +107,12 @@ public class AdminController2 extends Pane{
 	
 	@FXML
 	private TextField bookInfoBookName;
+	
+//	@FXML
+//	private TextField bookInfoCategory;
+	
+//	@FXML
+//	private TextField bookInfoCondition;
 	
 	@FXML
 	private TextField bookInfoAuthor;
@@ -656,8 +662,8 @@ public class AdminController2 extends Pane{
     	
     	
     	//get more information for statistics page
-    	buyersNumber.setText(""+allUsers.getNumBuyers());
-    	sellersNumber.setText(""+allUsers.getNumSellers());
+    	buyersNumber.setText(""+allUsers.getNumBuyers().toString());
+    	sellersNumber.setText(""+allUsers.getNumSellers().toString());
     	
     	Integer numU = allUsers.getNumUsers();
     	
