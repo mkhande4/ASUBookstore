@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="416.0" prefWidth="616.0" style="-fx-background-color: #8c1d40;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.BuyerPageController">
+<AnchorPane prefHeight="416.0" prefWidth="616.0" style="-fx-background-color: #8c1d40;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.BuyerController">
    <children>
       <Button layoutX="475.0" layoutY="14.0" mnemonicParsing="false" onAction="#logoutTime" prefHeight="50.0" prefWidth="76.0" style="-fx-background-color: #ffc627;" text="Log Out" />
       <Button layoutX="165.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToCheckout" prefHeight="50.0" prefWidth="70.0" style="-fx-background-color: #ffc627;" text="Checkout" />
