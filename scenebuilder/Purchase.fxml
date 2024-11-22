@@ -43,9 +43,25 @@
                <font>
                   <Font name="System Bold" size="20.0" />
                </font></Button>
-            <Line endX="885.0" layoutX="358.0" layoutY="575.0" startX="-349.0" />
+            <Line fx:id="bottomLine" endX="885.0" layoutX="358.0" layoutY="605.0" startX="-349.0" />
             <Label fx:id="statusLabel" alignment="CENTER" layoutX="5.0" layoutY="150.0" prefHeight="312.0" prefWidth="1229.0" style="-fx-font-size: 75px; -fx-font-weight: bold;" text="Purchase Successful!" visible="false" />
             <Label fx:id="emptyCartLabel" alignment="CENTER" layoutX="5.0" layoutY="150.0" prefHeight="312.0" prefWidth="1229.0" style="-fx-font-size: 75px; -fx-font-weight: bold;" text="Your cart is empty." visible="false" />
+            <Label fx:id="taxTextLabel" alignment="CENTER" layoutX="950.0" layoutY="560.0" prefHeight="50.0" prefWidth="120.0" text="Tax" visible="false">
+               <font>
+                  <Font size="26.0" />
+               </font></Label>
+            <Label fx:id="totalTextLabel" alignment="CENTER" layoutX="950.0" layoutY="600.0" prefHeight="50.0" prefWidth="120.0" text="Total" visible="false">
+               <font>
+                  <Font size="26.0" />
+               </font></Label>
+            <Label fx:id="totalNumberLabel" alignment="CENTER" layoutX="1050.0" layoutY="600.0" prefHeight="50.0" prefWidth="120.0" visible="false">
+               <font>
+                  <Font size="26.0" />
+               </font></Label>
+            <Label fx:id="taxNumberLabel" alignment="CENTER" layoutX="1050.0" layoutY="560.0" prefHeight="50.0" prefWidth="120.0" visible="false">
+               <font>
+                  <Font size="26.0" />
+               </font></Label>
             <Label fx:id="priceLabel" alignment="CENTER" layoutX="1050.0" layoutY="-5.0" prefHeight="50.0" prefWidth="120.0" text="Price" visible="false">
                <font>
                   <Font size="26.0" />
