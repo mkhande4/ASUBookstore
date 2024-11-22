@@ -12,6 +12,7 @@ public class Users {
 	private ArrayList<User> users = new ArrayList<User>();
 	private String fileName = "src/application/UserInfo";
 	protected Integer numUsers = setOriginalNumUsers();
+	protected Boolean isEmpty = true;
 	
 	public int setOriginalNumUsers() {
 		
@@ -72,6 +73,8 @@ public class Users {
 				}
 				User loadUser = new User(name, type, email, password, date);
 				users.add(loadUser);
+				
+				this.isEmpty = false;
 			}
 		} catch(FileNotFoundException e) {
 			System.out.println("Error: File not found.");
@@ -188,7 +191,7 @@ public class Users {
 		
 		System.out.println("No such user found.");
 	}
-
+	
 	public void changeUser(String email, String name,  String joinDate,  String password, String role) {
 		for(int i = 0; i < users.size(); i++) {
 			if((users.get(i).email).contentEquals(email) == true) {
@@ -201,23 +204,22 @@ public class Users {
 					String currentLine;
 					
 					// changes # of users
-					if((currentLine = reader.readLine()) != null) {
-						if(currentLine.matches("[0-9]+")) {
-							Integer num = Integer.valueOf(currentLine);
-							num--;
-							currentLine = num.toString();
-						}
-						writer.write(String.format("%s%n", currentLine));
-					}
+//					if((currentLine = reader.readLine()) != null) {
+//						writer.write(String.format("%s%n", currentLine));
+//					}
 					
 					// makes a new file that skips the deleted user
 					while((currentLine = reader.readLine()) != null) {
 						if(currentLine.equals(name)) {
-							writer.write(name + "%n");
-							writer.write(role + "%n");
-							writer.write(email + "%n");
-							writer.write(password + "%n");
-							writer.write(joinDate + "%n");
+							writer.write(String.format(name + "%n"));
+							reader.readLine();
+							writer.write(String.format(role + "%n"));
+							reader.readLine();
+							writer.write(String.format(email + "%n"));
+							reader.readLine();
+							writer.write(String.format(password + "%n"));
+							reader.readLine();
+							writer.write(String.format(joinDate + "%n"));
 							continue;
 						}
 						writer.write(String.format("%s%n", currentLine));
@@ -255,7 +257,7 @@ public class Users {
 	public User getUser(Integer i) {
 		return users.get(i);
 	}
-
+	
 	//need to add the following information for the admin page...
     public int getNumBuyers() {
         int numBuyers = 0;
