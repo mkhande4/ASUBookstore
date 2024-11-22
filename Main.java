@@ -19,9 +19,9 @@ public class Main extends Application {
 		SceneController sceneController = new SceneController(scene);
 		sceneController.addScene("login", FXMLLoader.load(getClass().getClassLoader().getResource("Login.fxml")));
 		sceneController.addScene("seller", FXMLLoader.load(getClass().getClassLoader().getResource("Seller.fxml")));
-		sceneController.addScene("buyer", FXMLLoader.load(getClass().getClassLoader().getResource("Buyer-Page.fxml")));
+		sceneController.addScene("buyer", FXMLLoader.load(getClass().getClassLoader().getResource("Buyer.fxml")));
 		sceneController.addScene("purchase", FXMLLoader.load(getClass().getClassLoader().getResource("Purchase.fxml")));
-		sceneController.addScene("admin", FXMLLoader.load(getClass().getClassLoader().getResource("Admin.fxml")));
+		sceneController.addScene("admin", FXMLLoader.load(getClass().getClassLoader().getResource("Admin2.fxml")));
 
 		if(thisUser.accountType == "") {
 			LoginController controller = new LoginController();
@@ -31,15 +31,11 @@ public class Main extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} else if (thisUser.accountType.toLowerCase().contains("seller")) {
-			SellerController sellerController = new SellerController();
-			loader.setController(sellerController);
 			sceneController.activate("seller");
 			
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} else if (thisUser.accountType.toLowerCase().contains("buyer")) {
-			BuyerPageController buyerController = new BuyerPageController();
-			loader.setController(buyerController);
 			sceneController.activate("buyer");
 			
 			primaryStage.setScene(scene);
@@ -50,8 +46,8 @@ public class Main extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} else if (thisUser.accountType.toLowerCase().contains("admin")) {
-			AdminController adminController = new AdminController();
-			loader.setController(adminController);
+			AdminController2 adminController2 = new AdminController2();
+			loader.setController(adminController2);
 			sceneController.activate("admin");
 			
 			primaryStage.setScene(scene);
