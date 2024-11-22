@@ -11,7 +11,7 @@ public class Books {
 	protected Integer numBooks = setOriginalNumBooks();
 	protected Boolean isEmpty = true;
 
-	public Integer setOriginalNumBooks() {
+	public int setOriginalNumBooks() {
 
 		Integer numBooks = 0;
 
@@ -26,7 +26,7 @@ public class Books {
 
 	}
 
-	public void setNumBooks( Integer num) {
+	public void setNumBooks(int num) {
 		this.numBooks = num;
 	}
 
@@ -34,9 +34,9 @@ public class Books {
 		return numBooks;
 	}
 	
-	public Integer getNumberSold() {
-        Integer numberSold = 0;
-        for ( Integer i = 0; i < numBooks; i++) {
+	public int getNumberSold() {
+        int numberSold = 0;
+        for (int i = 0; i < numBooks; i++) {
             if (books.get(i).sold == true) {
                 numberSold += 1;
             }
@@ -44,9 +44,9 @@ public class Books {
         return numberSold;
     }
 
-    public Integer getNumberOnMarket() {
-        Integer numberOnMarket = 0;
-        for ( Integer i = 0; i < numBooks; i++) {
+    public int getNumberOnMarket() {
+        int numberOnMarket = 0;
+        for (int i = 0; i < numBooks; i++) {
             if (books.get(i).sold == false) {
                 numberOnMarket += 1;
             }
@@ -54,11 +54,11 @@ public class Books {
         return numberOnMarket;
     }
 
-	public Integer getNumUsedLikeNew() {
+	public int getNumUsedLikeNew() {
 
-		 Integer numUsedLikeNew = 0;
+		int numUsedLikeNew = 0;
 
-		for ( Integer i = 0; i < numBooks; i++) {
+		for (int i = 0; i < numBooks; i++) {
 
 			if (books.get(i).condition == "Used Like New") {
 
@@ -72,11 +72,11 @@ public class Books {
 
 	}
 
-	public Integer getNumModeratelyUsed() {
+	public int getNumModeratelyUsed() {
 
-		 Integer numModeratelyUsed = 0;
+		int numModeratelyUsed = 0;
 
-		for ( Integer i = 0; i < numBooks; i++) {
+		for (int i = 0; i < numBooks; i++) {
 
 			if (books.get(i).condition == "Moderately Used") {
 
@@ -90,11 +90,11 @@ public class Books {
 
 	}
 
-	public Integer getNumHeavilyUsed() {
+	public int getNumHeavilyUsed() {
 
-		 Integer numHeavilyUsed = 0;
+		int numHeavilyUsed = 0;
 
-		for ( Integer i = 0; i < numBooks; i++) {
+		for (int i = 0; i < numBooks; i++) {
 
 			if (books.get(i).condition == "Heavily Used") {
 
@@ -108,11 +108,11 @@ public class Books {
 
 	}
 
-	public Integer getNumNaturalScienceBooks() {
+	public int getNumNaturalScienceBooks() {
 
-		 Integer numNaturalScienceBooks = 0;
+		int numNaturalScienceBooks = 0;
 
-		for ( Integer i = 0; i < numBooks; i++) {
+		for (int i = 0; i < numBooks; i++) {
 
 			if (books.get(i).category == "Natural Science") {
 
@@ -126,11 +126,11 @@ public class Books {
 
 	}
 
-	public Integer getNumComputerScienceBooks() {
+	public int getNumComputerScienceBooks() {
 
-		 Integer numComputerScienceBooks = 0;
+		int numComputerScienceBooks = 0;
 
-		for ( Integer i = 0; i < numBooks; i++) {
+		for (int i = 0; i < numBooks; i++) {
 
 			if (books.get(i).category == "Computer") {
 
@@ -144,11 +144,11 @@ public class Books {
 
 	}
 
-	public Integer getNumMathBooks() {
+	public int getNumMathBooks() {
 
-		 Integer numMathBooks = 0;
+		int numMathBooks = 0;
 
-		for ( Integer i = 0; i < numBooks; i++) {
+		for (int i = 0; i < numBooks; i++) {
 
 			if (books.get(i).category == "Math") {
 
@@ -162,13 +162,13 @@ public class Books {
 
 	}
 
-	public Integer getNumEnglishLanguageBooks() {
+	public int getNumEnglishLanguageBooks() {
 
-		 Integer numEnglishLanguageBooks = 0;
+		int numEnglishLanguageBooks = 0;
 
-		for ( Integer i = 0; i < numBooks; i++) {
+		for (int i = 0; i < numBooks; i++) {
 
-			if (books.get(i).category == "English Language") {
+			if (books.get(i).category.equals("English Language")) {
 
 				numEnglishLanguageBooks += 1;
 
@@ -187,7 +187,7 @@ public class Books {
 			// Read and skip the first line (number of books)
 			scan.nextLine();
 
-			for ( Integer i = 0; i < numBooks; i++) {
+			for (int i = 0; i < numBooks; i++) {
 				try {
 					// Skip any blank lines
 					String line = scan.nextLine().trim();
@@ -217,7 +217,7 @@ public class Books {
 					Boolean sold = Boolean.parseBoolean(scan.nextLine().trim());
 					
 					//Read published year
-					 Integer pubYear = Integer.parseInt(scan.nextLine().trim());
+					int pubYear = Integer.parseInt(scan.nextLine().trim());
 					Book loadBook = new Book(ID, isbn, title, author, condition, category, originalPrice,
 							generatedPrice, seller, buyer, sold, pubYear);
 					books.add(loadBook);
@@ -248,7 +248,7 @@ public class Books {
 	public Book searchBookById(Integer searchKey) {
 		Book noFoundBook = new Book();
 
-		for ( Integer i = 0; i < numBooks; i++) {
+		for (int i = 0; i < numBooks; i++) {
 			if (searchKey.equals(books.get(i).ID)) {
 				return books.get(i);
 			}
@@ -258,7 +258,7 @@ public class Books {
 	}
 
 	public void addBook(String isbn, String title, String author, String condition, String category,
-			Double originalPrice, Double generatedPrice, String seller, String buyer, Boolean sold, Integer pubYear) {
+			Double originalPrice, Double generatedPrice, String seller, String buyer, boolean sold, int pubYear) {
 
 		// Generate new ID (could be based on current size + 1 or other logic)
 		Integer newId = numBooks + 1;
@@ -277,7 +277,7 @@ public class Books {
 	}
 
 	public void deleteBook(Integer ID) {
-		for ( Integer i = 0; i < books.size(); i++) {
+		for (int i = 0; i < books.size(); i++) {
 			if (books.get(i).getId().equals(ID)) {
 				books.remove(i);
 				this.setNumBooks(numBooks - 1);
@@ -290,13 +290,13 @@ public class Books {
 	}
 
 	public void printBooks() {
-		for ( Integer i = 0; i < books.size(); i++) {
+		for (int i = 0; i < books.size(); i++) {
 			System.out.println(books.get(i).title);
 		}
 	}
 
 	// Add helper method to update the file
-	protected void updateBookFile() {
+	private void updateBookFile() {
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
 			// Write number of books as first line
 			writer.write(numBooks.toString());
@@ -332,10 +332,6 @@ public class Books {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	protected ArrayList<Book> getBooks() {
-		return books;
 	}
 
 }
