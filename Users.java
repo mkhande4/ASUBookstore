@@ -259,30 +259,30 @@ public class Users {
 	}
 	
 	//need to add the following information for the admin page...
-    public int getNumBuyers() {
-        int numBuyers = 0;
-        for (int i = 0; i < numUsers; i++) {
-            if (users.get(i).accountType == "Buyer") {
+public Integer getNumBuyers() {
+        Integer numBuyers = 0;
+        for (Integer i = 0; i < numUsers; i++) {
+            if (users.get(i).accountType.equals("Buyer")) {
                 numBuyers += 1;
             }
         }
         return numBuyers;
     }
     
-    public int getNumSellers() {
-        int numSellers = 0;
-        for (int i = 0; i < numUsers; i++) {
-            if (users.get(i).accountType == "Seller") {
+    public Integer getNumSellers() {
+        Integer numSellers = 0;
+        for (Integer i = 0; i < numUsers; i++) {
+            if (users.get(i).accountType.equals("Seller")) {
                 numSellers += 1;
             }
         }
         return numSellers;
     }
     
-    public int getNumAdmins() {
-        int numAdmins = 0;
-        for (int i = 0; i < numUsers; i++) {
-            if (users.get(i).accountType == "Admin") {
+    public Integer getNumAdmins() {
+        Integer numAdmins = 0;
+        for (Integer i = 0; i < numUsers; i++) {
+            if (users.get(i).accountType.equals("Admin")) {
                 numAdmins += 1;
             }
         }
