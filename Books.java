@@ -11,7 +11,7 @@ public class Books {
 	protected Integer numBooks = setOriginalNumBooks();
 	protected Boolean isEmpty = true;
 
-	public int setOriginalNumBooks() {
+	public Integer setOriginalNumBooks() {
 
 		Integer numBooks = 0;
 
@@ -26,7 +26,7 @@ public class Books {
 
 	}
 
-	public void setNumBooks(int num) {
+	public void setNumBooks(Integer num) {
 		this.numBooks = num;
 	}
 
@@ -34,8 +34,8 @@ public class Books {
 		return numBooks;
 	}
 	
-	public int getNumberSold() {
-        int numberSold = 0;
+	public Integer getNumberSold() {
+        Integer numberSold = 0;
         for (int i = 0; i < numBooks; i++) {
             if (books.get(i).sold == true) {
                 numberSold += 1;
@@ -44,8 +44,8 @@ public class Books {
         return numberSold;
     }
 
-    public int getNumberOnMarket() {
-        int numberOnMarket = 0;
+    public Integer getNumberOnMarket() {
+        Integer numberOnMarket = 0;
         for (int i = 0; i < numBooks; i++) {
             if (books.get(i).sold == false) {
                 numberOnMarket += 1;
@@ -54,13 +54,13 @@ public class Books {
         return numberOnMarket;
     }
 
-	public int getNumUsedLikeNew() {
+	public Integer getNumUsedLikeNew() {
 
-		int numUsedLikeNew = 0;
+		Integer numUsedLikeNew = 0;
 
 		for (int i = 0; i < numBooks; i++) {
 
-			if (books.get(i).condition == "Used Like New") {
+			if (books.get(i).condition.equals("Used Like New")) {
 
 				numUsedLikeNew += 1;
 
@@ -72,13 +72,13 @@ public class Books {
 
 	}
 
-	public int getNumModeratelyUsed() {
+	public Integer getNumModeratelyUsed() {
 
-		int numModeratelyUsed = 0;
+		Integer numModeratelyUsed = 0;
 
 		for (int i = 0; i < numBooks; i++) {
 
-			if (books.get(i).condition == "Moderately Used") {
+			if (books.get(i).condition.equals("Moderately Used")) {
 
 				numModeratelyUsed += 1;
 
@@ -90,13 +90,13 @@ public class Books {
 
 	}
 
-	public int getNumHeavilyUsed() {
+	public Integer getNumHeavilyUsed() {
 
-		int numHeavilyUsed = 0;
+		Integer numHeavilyUsed = 0;
 
 		for (int i = 0; i < numBooks; i++) {
 
-			if (books.get(i).condition == "Heavily Used") {
+			if (books.get(i).condition.equals("Heavily Used")) {
 
 				numHeavilyUsed += 1;
 
@@ -108,13 +108,13 @@ public class Books {
 
 	}
 
-	public int getNumNaturalScienceBooks() {
+	public Integer getNumNaturalScienceBooks() {
 
-		int numNaturalScienceBooks = 0;
+		Integer numNaturalScienceBooks = 0;
 
 		for (int i = 0; i < numBooks; i++) {
 
-			if (books.get(i).category == "Natural Science") {
+			if (books.get(i).category.equals("Natural Science")) {
 
 				numNaturalScienceBooks += 1;
 
@@ -126,13 +126,13 @@ public class Books {
 
 	}
 
-	public int getNumComputerScienceBooks() {
+	public Integer getNumComputerScienceBooks() {
 
-		int numComputerScienceBooks = 0;
+		Integer numComputerScienceBooks = 0;
 
 		for (int i = 0; i < numBooks; i++) {
 
-			if (books.get(i).category == "Computer") {
+			if (books.get(i).category.equals("Computer")) {
 
 				numComputerScienceBooks += 1;
 
@@ -144,13 +144,13 @@ public class Books {
 
 	}
 
-	public int getNumMathBooks() {
+	public Integer getNumMathBooks() {
 
-		int numMathBooks = 0;
+		Integer numMathBooks = 0;
 
 		for (int i = 0; i < numBooks; i++) {
 
-			if (books.get(i).category == "Math") {
+			if (books.get(i).category.equals("Math")) {
 
 				numMathBooks += 1;
 
@@ -162,9 +162,9 @@ public class Books {
 
 	}
 
-	public int getNumEnglishLanguageBooks() {
+	public Integer getNumEnglishLanguageBooks() {
 
-		int numEnglishLanguageBooks = 0;
+		Integer numEnglishLanguageBooks = 0;
 
 		for (int i = 0; i < numBooks; i++) {
 
@@ -217,7 +217,7 @@ public class Books {
 					Boolean sold = Boolean.parseBoolean(scan.nextLine().trim());
 					
 					//Read published year
-					int pubYear = Integer.parseInt(scan.nextLine().trim());
+					Integer pubYear = Integer.parseInt(scan.nextLine().trim());
 					Book loadBook = new Book(ID, isbn, title, author, condition, category, originalPrice,
 							generatedPrice, seller, buyer, sold, pubYear);
 					books.add(loadBook);
@@ -258,7 +258,7 @@ public class Books {
 	}
 
 	public void addBook(String isbn, String title, String author, String condition, String category,
-			Double originalPrice, Double generatedPrice, String seller, String buyer, boolean sold, int pubYear) {
+			Double originalPrice, Double generatedPrice, String seller, String buyer, Boolean sold, Integer pubYear) {
 
 		// Generate new ID (could be based on current size + 1 or other logic)
 		Integer newId = numBooks + 1;
@@ -296,7 +296,7 @@ public class Books {
 	}
 
 	// Add helper method to update the file
-	private void updateBookFile() {
+	protected void updateBookFile() {
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
 			// Write number of books as first line
 			writer.write(numBooks.toString());
@@ -332,6 +332,10 @@ public class Books {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public ArrayList<Book> getBooks() {
+		return books;
 	}
 
 }
