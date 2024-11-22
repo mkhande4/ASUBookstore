@@ -252,7 +252,7 @@ public class SellerController{
     	
     	//Call to checkIfEmpty function
     	if(inputIsMissing(title, isbn, author, condition, category,originalPrice, pubYear) == false) {
-        	Books.addBook(isbn, title, author, condition, category, Double.valueOf(originalPrice), generatedPrice(condition, Double.valueOf(originalPrice)) , seller, "", false, Integer.parseInt(pubYear));
+        	Books.addBook(isbn, title, author, condition, category, Double.valueOf(originalPrice), generatedPrice(category, condition, Double.valueOf(originalPrice)) , seller, "", false, Integer.parseInt(pubYear));
         	/*Testing purposes
         	System.out.println("Title: " + title );
         	System.out.println("ISBN: " + isbn );
@@ -292,14 +292,25 @@ public class SellerController{
  }
     
     //Function that returns a system generated price based on original price and condition
-    private double generatedPrice(String condition, Double origPrice ) {
+    private double generatedPrice(String category,String condition, Double origPrice ) {
+    	Double newPrice = origPrice;
+    	
+    	//Returning new price based on condition
     	if (condition == "Used Like New") {
-    		return (double) Math.round((origPrice *.90)* 100)/100;
+    		newPrice = (double) Math.round((newPrice *.90)* 100)/100;
     	}else if(condition == "Moderately Used") {
-    		return (double) Math.round((origPrice *.75) * 100 )/100;
+    		newPrice = (double) Math.round((newPrice *.75) * 100 )/100;
     	}else {
-    		return (double) Math.round((origPrice *.50) * 100)/100;
+    		newPrice = (double) Math.round((newPrice *.50) * 100)/100;
     	}
+    	
+    	if (category == "Other") {
+    		newPrice = (double) Math.round((newPrice *.96)* 100)/100;
+    	}else if(category == "English Language") {
+    		newPrice = (double) Math.round((newPrice *.98) * 100 )/100;
+    	}
+    	
+    	return newPrice;
     }
     
     //Function that returns true if any input from the user is missing
