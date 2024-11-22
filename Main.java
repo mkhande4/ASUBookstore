@@ -21,7 +21,7 @@ public class Main extends Application {
 		sceneController.addScene("seller", FXMLLoader.load(getClass().getClassLoader().getResource("Seller.fxml")));
 		sceneController.addScene("buyer", FXMLLoader.load(getClass().getClassLoader().getResource("Buyer.fxml")));
 		sceneController.addScene("purchase", FXMLLoader.load(getClass().getClassLoader().getResource("Purchase.fxml")));
-		sceneController.addScene("admin", FXMLLoader.load(getClass().getClassLoader().getResource("Admin2.fxml")));
+		sceneController.addScene("admin", FXMLLoader.load(getClass().getClassLoader().getResource("Admin.fxml")));
 
 		if(thisUser.accountType == "") {
 			LoginController controller = new LoginController();
@@ -46,8 +46,8 @@ public class Main extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} else if (thisUser.accountType.toLowerCase().contains("admin")) {
-			AdminController2 adminController2 = new AdminController2();
-			loader.setController(adminController2);
+			AdminController adminController = new AdminController();
+			loader.setController(adminController);
 			sceneController.activate("admin");
 			
 			primaryStage.setScene(scene);
